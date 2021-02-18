@@ -1,0 +1,25 @@
+
+body{
+  background-color: #f6f5f5;
+}
+table, th, td, ul, li, ol {
+  text-align: left;
+}
+a:link {
+  text-decoration: none;
+  color:#276678;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color:#276678;
+}
+
+a:active {
+  text-decoration: underline;
+  color:#276678;
+}
