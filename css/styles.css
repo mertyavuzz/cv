@@ -23,3 +23,8 @@ a:active {
   text-decoration: underline;
   color:#276678;
 }
+br {
+  display: block; /* makes it have a width */
+  content: ""; /* clears default height */
+  margin: 5px 0; /* change this to whatever height you want it */
+}
