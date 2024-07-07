@@ -127,6 +127,7 @@
         <table cellspacing="18">
             <thead>
                 <tr>
+                    <th> </th>
                     <th>Date</th>
                     <th>Work Place</th>
                     <th>Department</th>
@@ -135,6 +136,7 @@
             </thead>
             <tbody>
                 <tr class="expandable">
+                    <td class="toggle-sign">+</td>
                     <td><strong>05.2023-Continues</strong></td>
                     <td><strong>DHL Supply Chain LLP</strong></td>
                     <td><strong>Data Analytics</strong></td>
@@ -154,6 +156,7 @@
                     </td>
                 </tr>
                 <tr class="expandable">
+                  <td class="toggle-sign">+</td>
                   <td><strong>01.2023-05.2023</strong></td>
                   <td><strong>DHL Supply Chain LLP</strong></td>
                   <td><strong>Data Analytics</strong></td>
@@ -170,6 +173,7 @@
                   </td>
                 </tr>
                 <tr class="expandable">
+                  <td class="toggle-sign">+</td>
                   <td><strong>07.2021-12.2022</strong></td>
                   <td><strong>DHL Supply Chain LLP</strong></td>
                   <td><strong>P&G Operation</strong></td>
@@ -189,6 +193,7 @@
                   </td>
                 </tr>
                 <tr class="expandable">
+                  <td class="toggle-sign">+</td>
                   <td>
                     <strong>08.2019-09.2019</strong>
                   </td>
@@ -212,6 +217,7 @@
                   </td>
                 </tr>
                 <tr  class="expandable">
+                  <td class="toggle-sign">+</td>
                   <td>
                     <strong>06.2019-07.2019</strong>
                   </td>
@@ -237,6 +243,7 @@
                   </td>
                 </tr>
                 <tr  class="expandable">
+                  <td class="toggle-sign">+</td>
                   <td>
                     <strong>06.2018-07.2018</strong>
                   </td>
@@ -260,6 +267,7 @@
                   </td>
                 </tr>
                 <tr  class="expandable">
+                  <td class="toggle-sign">+</td>
                   <td>
                     <strong>06.2017-08.2017</strong>
                   </td>
@@ -800,46 +808,52 @@
     </div>
 
     <script>
-        document.querySelectorAll('.navbar a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.querySelectorAll('.content').forEach(section => section.classList.add('hidden'));
-                document.querySelector(link.getAttribute('href')).classList.remove('hidden');
-            });
+    document.querySelectorAll('.navbar a').forEach(link => {
+        link.addEventListener('click', function() {
+            document.querySelectorAll('.content').forEach(section => section.classList.add('hidden'));
+            document.querySelector(link.getAttribute('href')).classList.remove('hidden');
         });
+    });
 
-        document.querySelectorAll('.expandable').forEach(expandable => {
-            expandable.addEventListener('click', function() {
-                const details = expandable.nextElementSibling;
-                details.classList.toggle('hidden');
-            });
+    document.querySelectorAll('.expandable').forEach(expandable => {
+        expandable.addEventListener('click', function() {
+            const details = expandable.nextElementSibling;
+            details.classList.toggle('hidden');
+            const sign = expandable.querySelector('.toggle-sign');
+            if (details.classList.contains('hidden')) {
+                sign.textContent = '+';
+            } else {
+                sign.textContent = '-';
+            }
         });
+    });
 
-        const skillLinks = document.querySelectorAll('.skills-list a');
-        const projectFilter = document.getElementById('skill-filter');
+    const skillLinks = document.querySelectorAll('.skills-list a');
+    const projectFilter = document.getElementById('skill-filter');
 
-        skillLinks.forEach(skill => {
-            skill.addEventListener('click', function() {
-                const skillName = skill.textContent;
-                projectFilter.value = skillName;
-                filterProjects(skillName);
-                document.querySelector('.navbar a[href="#projects"]').click();
-            });
+    skillLinks.forEach(skill => {
+        skill.addEventListener('click', function() {
+            const skillName = skill.textContent;
+            projectFilter.value = skillName;
+            filterProjects(skillName);
+            document.querySelector('.navbar a[href="#projects"]').click();
         });
+    });
 
-        projectFilter.addEventListener('change', function() {
-            filterProjects(projectFilter.value);
+    projectFilter.addEventListener('change', function() {
+        filterProjects(projectFilter.value);
+    });
+
+    function filterProjects(skill) {
+        const projects = document.querySelectorAll('#projects-list .project');
+        projects.forEach(project => {
+            if (skill === "" || project.getAttribute('data-skills').includes(skill)) {
+                project.classList.remove('hidden');
+            } else {
+                project.classList.add('hidden');
+            }
         });
-
-        function filterProjects(skill) {
-            const projects = document.querySelectorAll('#projects-list .project');
-            projects.forEach(project => {
-                if (skill === "" || project.getAttribute('data-skills').includes(skill)) {
-                    project.classList.remove('hidden');
-                } else {
-                    project.classList.add('hidden');
-                }
-            });
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
